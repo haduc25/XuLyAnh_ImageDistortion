@@ -12,10 +12,10 @@ namespace ImageDistortion
         {
             InitializeComponent();
 
-            //Bitmap bitmap = new Bitmap(@"D:\Coding\CSharp\XuLyAnh\ImageDistortion\img\mai_lan.jpg");
+            Bitmap bitmap = new Bitmap(@"D:\Coding\CSharp\XuLyAnh\ImageDistortion\img\mai_lan.jpg");
 
-            //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            //pictureBox1.Image = bitmap;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Image = bitmap;
         }
 
         private void openBtn_Click(object sender, EventArgs e)
@@ -50,6 +50,50 @@ namespace ImageDistortion
                 pictureBox1.Image.Dispose();
                 pictureBox1.Image = null;
             }
+        }
+
+
+
+
+        private void btn_Convert_Click(object sender, EventArgs e)
+        {
+            ProcessImage();
+        }
+
+
+        // Process Image
+        public void ProcessImage()
+        {
+            Bitmap bmp = new Bitmap(@"D:\Coding\CSharp\XuLyAnh\ImageDistortion\img\mai_lan.jpg");
+
+            for (int i = 0; i < bmp.Width; i++)
+            {
+                for (int j = 0; j < bmp.Height; j++)
+                {
+                    //Color oldPixel = bmp.GetPixel(i, j);
+                    //Color newPixel = oldPixel;
+                    //bmp.SetPixel(i, j, newPixel);
+
+                    Color bmpColor = bmp.GetPixel(i, j);
+                    int red = bmpColor.R;
+                    int green = bmpColor.G;
+                    int blue = bmpColor.B;
+
+                    //covert to gray
+                    int gray = (byte)(.299 * red + .587 * green + .114 * blue);
+                    red = gray;
+                    green = gray;
+                    blue = gray;
+
+                    bmp.SetPixel(i, j, Color.FromArgb(red, green, blue));
+
+                }
+            }
+
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.Image = bmp;
+
+
         }
     }
 }
