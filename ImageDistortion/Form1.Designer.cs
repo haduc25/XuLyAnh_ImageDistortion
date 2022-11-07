@@ -30,20 +30,36 @@
         {
             this.openBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxInput = new System.Windows.Forms.PictureBox();
             this.delBtn = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxOutput = new System.Windows.Forms.PictureBox();
             this.btnMucXam = new System.Windows.Forms.Button();
             this.btnKhuNhieu = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.btnNhiPhan = new System.Windows.Forms.Button();
+            this.btnAmBan = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnBrightness = new System.Windows.Forms.Button();
+            this.btnContrast = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnCompress = new System.Windows.Forms.Button();
+            this.btnDecompress = new System.Windows.Forms.Button();
+            this.btnReduceImage = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOutput)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(12, 12);
+            this.openBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.openBtn.Location = new System.Drawing.Point(6, 26);
             this.openBtn.Name = "openBtn";
-            this.openBtn.Size = new System.Drawing.Size(123, 43);
+            this.openBtn.Size = new System.Drawing.Size(177, 43);
             this.openBtn.TabIndex = 0;
             this.openBtn.Text = "Open Image";
             this.openBtn.UseVisualStyleBackColor = true;
@@ -51,86 +67,248 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(813, 12);
+            this.saveBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.saveBtn.Location = new System.Drawing.Point(189, 75);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(123, 43);
+            this.saveBtn.Size = new System.Drawing.Size(177, 43);
             this.saveBtn.TabIndex = 1;
             this.saveBtn.Text = "Save Image";
             this.saveBtn.UseVisualStyleBackColor = true;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
-            // pictureBox1
+            // pictureBoxInput
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.pictureBox1.ImageLocation = "";
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(-2, 232);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(432, 319);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxInput.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.pictureBoxInput.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pictureBoxInput.ImageLocation = "";
+            this.pictureBoxInput.InitialImage = null;
+            this.pictureBoxInput.Location = new System.Drawing.Point(3, 26);
+            this.pictureBoxInput.Name = "pictureBoxInput";
+            this.pictureBoxInput.Size = new System.Drawing.Size(486, 373);
+            this.pictureBoxInput.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxInput.TabIndex = 0;
+            this.pictureBoxInput.TabStop = false;
             // 
             // delBtn
             // 
-            this.delBtn.Location = new System.Drawing.Point(165, 12);
+            this.delBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.delBtn.Location = new System.Drawing.Point(189, 26);
             this.delBtn.Name = "delBtn";
-            this.delBtn.Size = new System.Drawing.Size(123, 43);
+            this.delBtn.Size = new System.Drawing.Size(177, 43);
             this.delBtn.TabIndex = 2;
             this.delBtn.Text = "Delete Image";
             this.delBtn.UseVisualStyleBackColor = true;
             this.delBtn.Click += new System.EventHandler(this.delBtn_Click);
             // 
-            // pictureBox2
+            // pictureBoxOutput
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.pictureBox2.Location = new System.Drawing.Point(522, 232);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(432, 319);
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.SizeModeChanged += new System.EventHandler(this.pictureBox2_SizeModeChanged);
-            this.pictureBox2.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox2_DragDrop);
-            this.pictureBox2.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBox2_DragEnter);
+            this.pictureBoxOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.pictureBoxOutput.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pictureBoxOutput.Location = new System.Drawing.Point(3, 26);
+            this.pictureBoxOutput.Name = "pictureBoxOutput";
+            this.pictureBoxOutput.Size = new System.Drawing.Size(486, 373);
+            this.pictureBoxOutput.TabIndex = 3;
+            this.pictureBoxOutput.TabStop = false;
+            this.pictureBoxOutput.SizeModeChanged += new System.EventHandler(this.pictureBox2_SizeModeChanged);
+            this.pictureBoxOutput.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox2_DragDrop);
+            this.pictureBoxOutput.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBox2_DragEnter);
             // 
             // btnMucXam
             // 
-            this.btnMucXam.Location = new System.Drawing.Point(12, 77);
+            this.btnMucXam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnMucXam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMucXam.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnMucXam.ForeColor = System.Drawing.Color.White;
+            this.btnMucXam.Location = new System.Drawing.Point(206, 87);
             this.btnMucXam.Name = "btnMucXam";
-            this.btnMucXam.Size = new System.Drawing.Size(123, 43);
+            this.btnMucXam.Size = new System.Drawing.Size(177, 43);
             this.btnMucXam.TabIndex = 4;
-            this.btnMucXam.Text = "Chỉnh mức xám";
-            this.btnMucXam.UseVisualStyleBackColor = true;
+            this.btnMucXam.Text = "ẢNH XÁM";
+            this.btnMucXam.UseVisualStyleBackColor = false;
             this.btnMucXam.Click += new System.EventHandler(this.btn_Convert_Click);
             // 
             // btnKhuNhieu
             // 
-            this.btnKhuNhieu.Location = new System.Drawing.Point(165, 77);
+            this.btnKhuNhieu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnKhuNhieu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnKhuNhieu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnKhuNhieu.ForeColor = System.Drawing.Color.White;
+            this.btnKhuNhieu.Location = new System.Drawing.Point(6, 26);
             this.btnKhuNhieu.Name = "btnKhuNhieu";
-            this.btnKhuNhieu.Size = new System.Drawing.Size(123, 43);
+            this.btnKhuNhieu.Size = new System.Drawing.Size(177, 43);
             this.btnKhuNhieu.TabIndex = 5;
-            this.btnKhuNhieu.Text = "Khử nhiễu";
-            this.btnKhuNhieu.UseVisualStyleBackColor = true;
+            this.btnKhuNhieu.Text = "KHỬ NHIỄU";
+            this.btnKhuNhieu.UseVisualStyleBackColor = false;
             this.btnKhuNhieu.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnNhiPhan
+            // 
+            this.btnNhiPhan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnNhiPhan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNhiPhan.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnNhiPhan.ForeColor = System.Drawing.Color.White;
+            this.btnNhiPhan.Location = new System.Drawing.Point(6, 87);
+            this.btnNhiPhan.Name = "btnNhiPhan";
+            this.btnNhiPhan.Size = new System.Drawing.Size(177, 43);
+            this.btnNhiPhan.TabIndex = 6;
+            this.btnNhiPhan.Text = "NHỊ PHÂN";
+            this.btnNhiPhan.UseVisualStyleBackColor = false;
+            this.btnNhiPhan.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // btnAmBan
+            // 
+            this.btnAmBan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnAmBan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAmBan.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAmBan.ForeColor = System.Drawing.Color.White;
+            this.btnAmBan.Location = new System.Drawing.Point(206, 26);
+            this.btnAmBan.Name = "btnAmBan";
+            this.btnAmBan.Size = new System.Drawing.Size(177, 43);
+            this.btnAmBan.TabIndex = 7;
+            this.btnAmBan.Text = "ÂM BẢN";
+            this.btnAmBan.UseVisualStyleBackColor = false;
+            this.btnAmBan.Click += new System.EventHandler(this.btnAmBan_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.pictureBoxOutput);
+            this.groupBox1.Location = new System.Drawing.Point(542, 193);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(492, 402);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Output";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.pictureBoxInput);
+            this.groupBox2.Location = new System.Drawing.Point(12, 193);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(492, 402);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Input";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnReduceImage);
+            this.groupBox3.Controls.Add(this.btnDecompress);
+            this.groupBox3.Controls.Add(this.btnCompress);
+            this.groupBox3.Controls.Add(this.btnBrightness);
+            this.groupBox3.Controls.Add(this.btnContrast);
+            this.groupBox3.Controls.Add(this.btnNhiPhan);
+            this.groupBox3.Controls.Add(this.btnKhuNhieu);
+            this.groupBox3.Controls.Add(this.btnAmBan);
+            this.groupBox3.Controls.Add(this.btnMucXam);
+            this.groupBox3.Location = new System.Drawing.Point(15, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(614, 184);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Chức năng";
+            // 
+            // btnBrightness
+            // 
+            this.btnBrightness.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnBrightness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBrightness.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnBrightness.ForeColor = System.Drawing.Color.White;
+            this.btnBrightness.Location = new System.Drawing.Point(405, 26);
+            this.btnBrightness.Name = "btnBrightness";
+            this.btnBrightness.Size = new System.Drawing.Size(177, 43);
+            this.btnBrightness.TabIndex = 9;
+            this.btnBrightness.Text = "ĐỘ SÁNG";
+            this.btnBrightness.UseVisualStyleBackColor = false;
+            this.btnBrightness.Click += new System.EventHandler(this.btnBrightness_Click);
+            // 
+            // btnContrast
+            // 
+            this.btnContrast.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnContrast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnContrast.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnContrast.ForeColor = System.Drawing.Color.White;
+            this.btnContrast.Location = new System.Drawing.Point(405, 87);
+            this.btnContrast.Name = "btnContrast";
+            this.btnContrast.Size = new System.Drawing.Size(177, 43);
+            this.btnContrast.TabIndex = 8;
+            this.btnContrast.Text = "ĐỘ TƯƠNG PHẢN";
+            this.btnContrast.UseVisualStyleBackColor = false;
+            this.btnContrast.Click += new System.EventHandler(this.btnContrast_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.openBtn);
+            this.groupBox4.Controls.Add(this.delBtn);
+            this.groupBox4.Controls.Add(this.saveBtn);
+            this.groupBox4.Location = new System.Drawing.Point(635, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(386, 173);
+            this.groupBox4.TabIndex = 11;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "File";
+            // 
+            // btnCompress
+            // 
+            this.btnCompress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCompress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCompress.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCompress.ForeColor = System.Drawing.Color.White;
+            this.btnCompress.Location = new System.Drawing.Point(6, 141);
+            this.btnCompress.Name = "btnCompress";
+            this.btnCompress.Size = new System.Drawing.Size(177, 43);
+            this.btnCompress.TabIndex = 10;
+            this.btnCompress.Text = "NÉN ẢNH";
+            this.btnCompress.UseVisualStyleBackColor = false;
+            this.btnCompress.Click += new System.EventHandler(this.btnCompress_Click);
+            // 
+            // btnDecompress
+            // 
+            this.btnDecompress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnDecompress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDecompress.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDecompress.ForeColor = System.Drawing.Color.White;
+            this.btnDecompress.Location = new System.Drawing.Point(206, 141);
+            this.btnDecompress.Name = "btnDecompress";
+            this.btnDecompress.Size = new System.Drawing.Size(177, 43);
+            this.btnDecompress.TabIndex = 11;
+            this.btnDecompress.Text = "GIẢI NÉN ẢNH";
+            this.btnDecompress.UseVisualStyleBackColor = false;
+            this.btnDecompress.Click += new System.EventHandler(this.btnDecompress_Click);
+            // 
+            // btnReduceImage
+            // 
+            this.btnReduceImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnReduceImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReduceImage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnReduceImage.ForeColor = System.Drawing.Color.White;
+            this.btnReduceImage.Location = new System.Drawing.Point(405, 141);
+            this.btnReduceImage.Name = "btnReduceImage";
+            this.btnReduceImage.Size = new System.Drawing.Size(177, 43);
+            this.btnReduceImage.TabIndex = 12;
+            this.btnReduceImage.Text = "GIẢM DUNG LƯỢNG";
+            this.btnReduceImage.UseVisualStyleBackColor = false;
+            this.btnReduceImage.Click += new System.EventHandler(this.btnReduceImage_Click);
             // 
             // ImageDistortion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 552);
-            this.Controls.Add(this.btnKhuNhieu);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.btnMucXam);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.delBtn);
-            this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.openBtn);
+            this.ClientSize = new System.Drawing.Size(1033, 595);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "ImageDistortion";
             this.Text = "ImageDistortion";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.Load += new System.EventHandler(this.ImageDistortion_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOutput)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -140,9 +318,20 @@
         private Button openBtn;
         private Button saveBtn;
         private Button delBtn;
-        private PictureBox pictureBox2;
+        private PictureBox pictureBoxOutput;
         private Button btnMucXam;
-        public PictureBox pictureBox1;
+        public PictureBox pictureBoxInput;
         private Button btnKhuNhieu;
+        private Button btnNhiPhan;
+        private Button btnAmBan;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
+        private GroupBox groupBox3;
+        private GroupBox groupBox4;
+        private Button btnBrightness;
+        private Button btnContrast;
+        private Button btnReduceImage;
+        private Button btnDecompress;
+        private Button btnCompress;
     }
 }

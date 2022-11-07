@@ -12,11 +12,16 @@ namespace ImageDistortion
         public ImageDistortion()
         {
             InitializeComponent();
-            saveBtn.Enabled = false;
-            pictureBox2.AllowDrop = true;
-
-
         }
+
+
+        private void ImageDistortion_Load(object sender, EventArgs e)
+        {
+            saveBtn.Enabled = false;
+            pictureBoxOutput.AllowDrop = true;
+            pictureBoxOutput.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
 
         private void openBtn_Click(object sender, EventArgs e)
         {
@@ -29,178 +34,100 @@ namespace ImageDistortion
             {
                 image = Image.FromFile(ofd.FileName);
                 bmp = (Bitmap)image;
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox1.Image = bmp;
+                pictureBoxInput.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBoxInput.Image = bmp;
             }
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            if (pictureBox2.Image != null)
+            if (pictureBoxOutput.Image != null)
             {
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = @"PNG|*.png}";
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    pictureBox1.Image.Save(sfd.FileName, ImageFormat.Png);
+                    pictureBoxInput.Image.Save(sfd.FileName, ImageFormat.Png);
                 }
             }
         }
 
         private void delBtn_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image != null)
+            if (pictureBoxInput.Image != null || pictureBoxOutput.Image != null)
             {
-                pictureBox1.Image.Dispose();
-                pictureBox1.Image = null;
+                DialogResult dialogResult = MessageBox.Show("Hành động này sẽ xóa ảnh hiện tại.", "Image not save?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    if (pictureBoxInput.Image != null)
+                    {
+                        pictureBoxInput.Image.Dispose();
+                        pictureBoxInput.Image = null;
+                    }
+
+                    if (pictureBoxOutput.Image != null)
+                    {
+                        pictureBoxOutput.Image.Dispose();
+                        pictureBoxOutput.Image = null;
+                    }
+                }
             }
+            else
+            {
+                MessageBox.Show("Chưa có ảnh!", "Image Null");
+            }
+
         }
 
 
 
         private void btn_Convert_Click(object sender, EventArgs e)
         {
-            ProcessImage();
-        }
-
-
-
-        // Process Image
-        public void ProcessImage()
-        {
-            if (pictureBox1.Image != null)
+            if (pictureBoxInput.Image != null)
             {
-                Bitmap bmp = new Bitmap(pictureBox1.Image);
-
-                for (int i = 0; i < bmp.Width; i++)
-                {
-                    for (int j = 0; j < bmp.Height; j++)
-                    {
-                        //Color oldPixel = bmp.GetPixel(i, j);
-                        //Color newPixel = oldPixel;
-                        //bmp.SetPixel(i, j, newPixel);
-
-                        Color bmpColor = bmp.GetPixel(i, j);
-                        int red = bmpColor.R;
-                        int green = bmpColor.G;
-                        int blue = bmpColor.B;
-                        int alpha = bmpColor.A;
-
-                        //covert to gray
-                        int gray = (byte)(.299 * red + .587 * green + .114 * blue);
-                        red = gray;
-                        green = gray;
-                        blue = gray;
-
-                        bmp.SetPixel(i, j, Color.FromArgb(red, green, blue));
-
-                    }
-                }
-
-                pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox2.Image = bmp;
-
+                btnMucXam.Text = "Loading...";
+                btnMucXam.Enabled = false;
+                if (ChuyenAnhXam(bmp))
+                    pictureBoxOutput.Image = bmp;
+                btnMucXam.Enabled = true;
+                btnMucXam.Text = "ẢNH XÁM";
             }
             else
             {
-                MessageBox.Show("Ảnh trống");
+                MessageBox.Show("Chưa có ảnh đầu vào!", "Image Null");
             }
         }
 
 
 
-
-        //test
-        protected override void OnPaint(PaintEventArgs e)
+        // ChuyenAnhXam
+        public static bool ChuyenAnhXam(Bitmap bmp)
         {
-            base.OnPaint(e);
+            for (int i = 0; i < bmp.Width; i++)
+            {
+                for (int j = 0; j < bmp.Height; j++)
+                {
+                    Color bmpColor = bmp.GetPixel(i, j);
+                    int red = bmpColor.R;
+                    int green = bmpColor.G;
+                    int blue = bmpColor.B;
+                    int alpha = bmpColor.A;
 
-            Bitmap xImage = new Bitmap(@"D:\Coding\CSharp\XuLyAnh\ImageDistortion\img\mai_lan.jpg");
+                    //chuyển đổi qua ảnh xám
+                    int gray = (byte)(.299 * red + .587 * green + .114 * blue);
+                    red = gray;
+                    green = gray;
+                    blue = gray;
 
-            Size xImageSize = xImage.Size;
-            int Skew = 69;
-
-            //using (Bitmap xNewImage = new Bitmap(120, 120)) //Determine your size
-            //{
-            //    //using (Graphics xGraphics = Graphics.FromImage(xNewImage))
-            //    //{
-            //    //    Point[] xPointsA =
-            //    //    {
-            //    //    new Point(0, Skew), //Upper Left
-            //    //    new Point(xImageSize.Width, 0), //Upper Right
-            //    //    new Point(0, xImageSize.Height + Skew) //Lower left
-            //    //};
-            //    //    Point[] xPointsB =
-            //    //    {
-            //    //    new Point(xImageSize.Width, 0), //Upper Left
-            //    //    new Point(xImageSize.Width*2, Skew), //Upper Right
-            //    //    new Point(xImageSize.Width, xImageSize.Height) //Lower left
-            //    //};
-            //    //    Point[] xPointsC =
-            //    //    {
-            //    //    new Point(xImageSize.Width, xImageSize.Height), //Upper Left
-            //    //    new Point(xImageSize.Width*2, xImageSize.Height + Skew), //Upper Right
-            //    //    new Point(0, xImageSize.Height + Skew) //Lower left
-            //    //};
-
-            //    //    //Draw to new Image
-            //    //    xGraphics.DrawImage(xImage, xPointsA);
-            //    //    xGraphics.DrawImage(xImage, xPointsB);
-            //    //    xGraphics.DrawImage(xImage, xPointsC);
-            //    //}
-            //    //e.Graphics.DrawImage(xNewImage, new Point()); //Here you would want to assign the new image to the picture box
-
-            //}
-
-            //Image image = new Bitmap(xImage, 260, 340);
-            Image image = new Bitmap(xImage);
-
-            Point[] destinationPoints = {
-                //new Point(200, 20),   // destination for upper-left point of
-                //new Point(110, 100),  // destination for upper-right point of
-                //new Point(250, 30)};  // destination for lower-left point of
-
-                //new Point(0, Skew),   // destination for upper-left point of
-                //new Point(image.Size.Width, 0),  // destination for upper-right point of
-                //new Point(0, image.Size.Height)};  // destination for lower-left point of
-
-                
-                //new Point(image.Size.Width, 0),  // destination for upper-right point of
-                //new Point(image.Size.Width * 2, 0),  // destination for upper-right point of
-                //new Point(0, Skew),   // destination for upper-left point of
-                //new Point(0, image.Size.Height)};  // destination for lower-left point of
-                                                   // 
-
-                //new Point(0, 0),   // destination for upper-left point of
-                //new Point(260, 0),  // destination for upper-right point of
-                //new Point(0, 320)};  // destination for lower-left point of
-
-
-                new Point(0, 600),   // destination for upper-left point of
-                new Point(image.Size.Width, 0),  // destination for upper-right point of
-                new Point(600, image.Size.Height)};  // destination for lower-left point of
-
-
-
-
-            // Draw the image unaltered with its upper-left corner at (0, 0).
-            //e.Graphics.DrawImage(image, 0, 0);
-
-            // Draw the image mapped to the parallelogram.
-            //e.Graphics.DrawImage(image, destinationPoints);
-
-
-
-
-            //Graphics g = Graphics.FromImage(image);
-            //g.DrawImage(image, new Point(260, 380));
-            ////g.DrawImage(image, destinationPoints);
-
-            ////g.Dispose();
-            //pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            //pictureBox2.Image = image;
+                    bmp.SetPixel(i, j, Color.FromArgb(red, green, blue));
+                }
+            }
+            return true;
         }
 
+
+
+        //Drag & Drop
         private void pictureBox2_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
@@ -214,32 +141,40 @@ namespace ImageDistortion
                 var fileNames = data as string[];
                 if (fileNames.Length > 0)
                 {
-                    pictureBox2.Image = Image.FromFile(fileNames[0]);
+                    pictureBoxOutput.Image = Image.FromFile(fileNames[0]);
                 }
             }
         }
 
         private void pictureBox2_SizeModeChanged(object sender, EventArgs e)
         {
-            saveBtn.Enabled =  true;
+            saveBtn.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image != null)
+            if (pictureBoxInput.Image != null)
             {
+                btnKhuNhieu.Text = "Loading...";
+                btnKhuNhieu.Enabled = false;
+                if (LocTrungVi(bmp))
+                {
+                    pictureBoxOutput.Image = bmp;
+                }
+                btnKhuNhieu.Enabled = true;
+                btnKhuNhieu.Text = "KHỬ NHIỄU";
 
             }
             else
             {
-                MessageBox.Show("loi chua co img");
+                MessageBox.Show("Chưa có ảnh đầu vào!", "Image Null");
             }
         }
+        unsafe
 
-        //Loc TV
+        //Loc trung vi
         public static bool LocTrungVi(Bitmap img)
         {
-            //Loc trung vi
             Bitmap imgtmp = (Bitmap)img.Clone();
             BitmapData imgdata = img.LockBits(new Rectangle(0, 0, img.Width, img.Height),
                                 ImageLockMode.ReadWrite,
@@ -293,20 +228,128 @@ namespace ImageDistortion
             return true;
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (pictureBoxInput.Image != null)
+            {
+                btnNhiPhan.Text = "Loading...";
+                btnNhiPhan.Enabled = false;
+                pictureBoxOutput.Image = ChuyenAnhNhiPhan(bmp, 128);
+                btnNhiPhan.Enabled = true;
+                btnNhiPhan.Text = "NHỊ PHÂN";
+            }
+            else
+            {
+                MessageBox.Show("Chưa có ảnh đầu vào!", "Image Null");
+            }
+        }
+        unsafe
 
+        //ChuyenAnhNhiPhan
+       private Bitmap ChuyenAnhNhiPhan(Bitmap bmp, byte nguong)
+        {
+            Bitmap imgtmp = new Bitmap(bmp);
+            imgtmp = bmp;
 
+            BitmapData imgdata = imgtmp.LockBits(new Rectangle(0, 0, imgtmp.Width, imgtmp.Height),
+                                                ImageLockMode.ReadWrite,
+                                                imgtmp.PixelFormat);
 
+            int offset = imgdata.Stride - imgtmp.Width * 3;
 
+            byte* p = (byte*)imgdata.Scan0;
 
+            for (int i = 0; i < imgtmp.Height; i++)
+            {
+                for (int j = 0; j < imgtmp.Width; j++)
+                {
+                    //Xử lý 3 byte của 1 pixel
+                    int t = (p[0] + p[1] + p[2]) / 3;
+                    if ((byte)t < nguong)
+                    {
+                        t = 0;
+                    }
+                    else t = 255;
+                    p[0] = (byte)t;
+                    p[1] = (byte)t;
+                    p[2] = (byte)t;
+                    p += 3;
+                }
+                p += offset;
+            }
+            imgtmp.UnlockBits(imgdata);
+            return imgtmp;
+        }
 
+        private void btnAmBan_Click(object sender, EventArgs e)
+        {
+            if (pictureBoxInput.Image != null)
+            {
+                btnAmBan.Text = "Loading...";
+                btnAmBan.Enabled = false;
+                pictureBoxOutput.Image = ChuyenAnhAmBan(bmp);
+                btnAmBan.Enabled = true;
+                btnAmBan.Text = "ÂM BẢN";
+            }
+            else
+            {
+                MessageBox.Show("Chưa có ảnh đầu vào!", "Image Null");
+            }
+        }
+        unsafe
 
+        //ChuyenAnhAmBan
+        private Bitmap ChuyenAnhAmBan(Bitmap img)
+        {
+            Bitmap imgtmp = new Bitmap(img.Width, img.Height);
+            imgtmp = img;
+            BitmapData imgdata = imgtmp.LockBits(new Rectangle(0, 0, imgtmp.Width, imgtmp.Height), ImageLockMode.ReadWrite, imgtmp.PixelFormat);
+            int offset = imgdata.Stride - 3 * imgtmp.Width;
 
+            byte* p = (byte*)imgdata.Scan0;
+            for (int i = 0; i < imgtmp.Height; i++)
+            {
+                for (int j = 0; j < imgtmp.Width; j++)
+                {
+                    int t = (p[0] + p[1] + p[2]) / 3;
+                    t = 255 - t;
+                    p[0] = (byte)t;
+                    p[1] = (byte)t;
+                    p[2] = (byte)t;
 
+                    p += 3;
+                }
+                p += offset;
+            }
+            imgtmp.UnlockBits(imgdata);
+            return imgtmp;
+        }
 
+        private void btnBrightness_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tính năng này đang hoàn thiện! 😊");
+        }
 
+        private void btnContrast_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tính năng này đang hoàn thiện! 😊");
+        }
 
+        private void btnCompress_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tính năng này đang hoàn thiện! 😊");
 
+        }
 
+        private void btnDecompress_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tính năng này đang hoàn thiện! 😊");
 
+        }
+
+        private void btnReduceImage_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tính năng này đang hoàn thiện! 😊");
+        }
     }
 }
