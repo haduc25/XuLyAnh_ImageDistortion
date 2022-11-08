@@ -18,9 +18,13 @@ namespace ImageDistortion
 
         private void ImageDistortion_Load(object sender, EventArgs e)
         {
+            gbChucNang.Enabled = false;
             btnSave.Enabled = false;
+            btnDelOutput.Enabled = false;
             pictureBoxOutput.AllowDrop = true;
             pictureBoxOutput.SizeMode = PictureBoxSizeMode.Zoom;
+
+
         }
 
 
@@ -45,7 +49,7 @@ namespace ImageDistortion
             if (pictureBoxOutput.Image != null)
             {
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = @"PNG|*.png}";
+                sfd.Filter = @"PNG|*.png";
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
                     pictureBoxInput.Image.Save(sfd.FileName, ImageFormat.Png);
@@ -149,7 +153,7 @@ namespace ImageDistortion
 
         private void pictureBox2_SizeModeChanged(object sender, EventArgs e)
         {
-            btnSave.Enabled = true;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -701,6 +705,14 @@ namespace ImageDistortion
             {
                 pictureBoxOutput.Image = null;
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            DialogResult rs = MessageBox.Show("Bạn có chắc chắn muốn thoát.", "Exit?", MessageBoxButtons.YesNo);
+            if (rs == DialogResult.Yes)
+                Application.Exit();
+            return;
         }
     }
 }

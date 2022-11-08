@@ -37,22 +37,23 @@
             this.btnKhuNhieu = new System.Windows.Forms.Button();
             this.btnNhiPhan = new System.Windows.Forms.Button();
             this.btnAmBan = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gpOutput = new System.Windows.Forms.GroupBox();
+            this.gpInput = new System.Windows.Forms.GroupBox();
+            this.gbChucNang = new System.Windows.Forms.GroupBox();
             this.btnSharpen = new System.Windows.Forms.Button();
             this.btnDecompress = new System.Windows.Forms.Button();
             this.btnCompress = new System.Windows.Forms.Button();
             this.btnBrightness = new System.Windows.Forms.Button();
             this.btnContrast = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.gbHandleFile = new System.Windows.Forms.GroupBox();
+            this.btnExit = new System.Windows.Forms.Button();
             this.btnDelOutput = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOutput)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.gpOutput.SuspendLayout();
+            this.gpInput.SuspendLayout();
+            this.gbChucNang.SuspendLayout();
+            this.gbHandleFile.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOpen
@@ -69,7 +70,7 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSave.Location = new System.Drawing.Point(0, 75);
+            this.btnSave.Location = new System.Drawing.Point(6, 87);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(177, 43);
             this.btnSave.TabIndex = 1;
@@ -81,7 +82,6 @@
             // 
             this.pictureBoxInput.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pictureBoxInput.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBoxInput.Image = global::ImageDistortion.Properties.Resources.mai_lan1;
             this.pictureBoxInput.ImageLocation = "";
             this.pictureBoxInput.InitialImage = null;
             this.pictureBoxInput.Location = new System.Drawing.Point(3, 26);
@@ -171,43 +171,43 @@
             this.btnAmBan.UseVisualStyleBackColor = false;
             this.btnAmBan.Click += new System.EventHandler(this.btnAmBan_Click);
             // 
-            // groupBox1
+            // gpOutput
             // 
-            this.groupBox1.Controls.Add(this.pictureBoxOutput);
-            this.groupBox1.Location = new System.Drawing.Point(542, 193);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(492, 402);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Output";
+            this.gpOutput.Controls.Add(this.pictureBoxOutput);
+            this.gpOutput.Location = new System.Drawing.Point(542, 193);
+            this.gpOutput.Name = "gpOutput";
+            this.gpOutput.Size = new System.Drawing.Size(492, 402);
+            this.gpOutput.TabIndex = 8;
+            this.gpOutput.TabStop = false;
+            this.gpOutput.Text = "Output";
             // 
-            // groupBox2
+            // gpInput
             // 
-            this.groupBox2.Controls.Add(this.pictureBoxInput);
-            this.groupBox2.Location = new System.Drawing.Point(12, 193);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(492, 402);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Input";
+            this.gpInput.Controls.Add(this.pictureBoxInput);
+            this.gpInput.Location = new System.Drawing.Point(12, 193);
+            this.gpInput.Name = "gpInput";
+            this.gpInput.Size = new System.Drawing.Size(492, 402);
+            this.gpInput.TabIndex = 9;
+            this.gpInput.TabStop = false;
+            this.gpInput.Text = "Input";
             // 
-            // groupBox3
+            // gbChucNang
             // 
-            this.groupBox3.Controls.Add(this.btnSharpen);
-            this.groupBox3.Controls.Add(this.btnDecompress);
-            this.groupBox3.Controls.Add(this.btnCompress);
-            this.groupBox3.Controls.Add(this.btnBrightness);
-            this.groupBox3.Controls.Add(this.btnContrast);
-            this.groupBox3.Controls.Add(this.btnNhiPhan);
-            this.groupBox3.Controls.Add(this.btnKhuNhieu);
-            this.groupBox3.Controls.Add(this.btnAmBan);
-            this.groupBox3.Controls.Add(this.btnMucXam);
-            this.groupBox3.Location = new System.Drawing.Point(15, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(614, 184);
-            this.groupBox3.TabIndex = 10;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Chức năng";
+            this.gbChucNang.Controls.Add(this.btnSharpen);
+            this.gbChucNang.Controls.Add(this.btnDecompress);
+            this.gbChucNang.Controls.Add(this.btnCompress);
+            this.gbChucNang.Controls.Add(this.btnBrightness);
+            this.gbChucNang.Controls.Add(this.btnContrast);
+            this.gbChucNang.Controls.Add(this.btnNhiPhan);
+            this.gbChucNang.Controls.Add(this.btnKhuNhieu);
+            this.gbChucNang.Controls.Add(this.btnAmBan);
+            this.gbChucNang.Controls.Add(this.btnMucXam);
+            this.gbChucNang.Location = new System.Drawing.Point(15, 3);
+            this.gbChucNang.Name = "gbChucNang";
+            this.gbChucNang.Size = new System.Drawing.Size(614, 184);
+            this.gbChucNang.TabIndex = 10;
+            this.gbChucNang.TabStop = false;
+            this.gbChucNang.Text = "Chức năng";
             // 
             // btnSharpen
             // 
@@ -279,23 +279,35 @@
             this.btnContrast.UseVisualStyleBackColor = false;
             this.btnContrast.Click += new System.EventHandler(this.btnContrast_Click);
             // 
-            // groupBox4
+            // gbHandleFile
             // 
-            this.groupBox4.Controls.Add(this.btnDelOutput);
-            this.groupBox4.Controls.Add(this.btnOpen);
-            this.groupBox4.Controls.Add(this.btnDelAll);
-            this.groupBox4.Controls.Add(this.btnSave);
-            this.groupBox4.Location = new System.Drawing.Point(635, 3);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(386, 184);
-            this.groupBox4.TabIndex = 11;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "File";
+            this.gbHandleFile.Controls.Add(this.btnExit);
+            this.gbHandleFile.Controls.Add(this.btnDelOutput);
+            this.gbHandleFile.Controls.Add(this.btnOpen);
+            this.gbHandleFile.Controls.Add(this.btnDelAll);
+            this.gbHandleFile.Controls.Add(this.btnSave);
+            this.gbHandleFile.Location = new System.Drawing.Point(635, 3);
+            this.gbHandleFile.Name = "gbHandleFile";
+            this.gbHandleFile.Size = new System.Drawing.Size(386, 184);
+            this.gbHandleFile.TabIndex = 11;
+            this.gbHandleFile.TabStop = false;
+            this.gbHandleFile.Text = "File";
+            // 
+            // btnExit
+            // 
+            this.btnExit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnExit.Location = new System.Drawing.Point(6, 141);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(360, 43);
+            this.btnExit.TabIndex = 4;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnDelOutput
             // 
             this.btnDelOutput.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnDelOutput.Location = new System.Drawing.Point(189, 75);
+            this.btnDelOutput.Location = new System.Drawing.Point(189, 87);
             this.btnDelOutput.Name = "btnDelOutput";
             this.btnDelOutput.Size = new System.Drawing.Size(177, 43);
             this.btnDelOutput.TabIndex = 3;
@@ -308,10 +320,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1033, 595);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbHandleFile);
+            this.Controls.Add(this.gbChucNang);
+            this.Controls.Add(this.gpInput);
+            this.Controls.Add(this.gpOutput);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "ImageDistortion";
@@ -319,10 +331,10 @@
             this.Load += new System.EventHandler(this.ImageDistortion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOutput)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
+            this.gpOutput.ResumeLayout(false);
+            this.gpInput.ResumeLayout(false);
+            this.gbChucNang.ResumeLayout(false);
+            this.gbHandleFile.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -338,15 +350,16 @@
         private Button btnKhuNhieu;
         private Button btnNhiPhan;
         private Button btnAmBan;
-        private GroupBox groupBox1;
-        private GroupBox groupBox2;
-        private GroupBox groupBox3;
-        private GroupBox groupBox4;
+        private GroupBox gpOutput;
+        private GroupBox gpInput;
+        private GroupBox gbChucNang;
+        private GroupBox gbHandleFile;
         private Button btnBrightness;
         private Button btnContrast;
         private Button btnSharpen;
         private Button btnDecompress;
         private Button btnCompress;
         private Button btnDelOutput;
+        private Button btnExit;
     }
 }
