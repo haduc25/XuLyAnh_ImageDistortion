@@ -2,6 +2,7 @@
 {
     internal class IncreasePicture
     {
+        #region Handle Increase Brightness
         public static bool increaseBrightness(Bitmap picture, int value)
         {
             try
@@ -39,8 +40,9 @@
                 }
             return true;
         }
+        #endregion
 
-
+        #region Handle Increase Contrast
         public static bool increaseContrast(Bitmap picture, double value)
         {
             // Khai báo các biến
@@ -117,5 +119,6 @@
             }
             return true;
         }
+        #endregion
     }
 }

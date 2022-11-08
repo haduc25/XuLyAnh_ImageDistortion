@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Data;
 using System.Drawing.Imaging;
 using System.Text;
 
@@ -7,16 +6,15 @@ namespace ImageDistortion
 {
     public partial class ImageDistortion : Form
     {
-        Image image;
-        Bitmap bmp;
-        Thread thread;
-
         public ImageDistortion()
         {
             InitializeComponent();
         }
 
-
+        #region Initial Value
+        Image image;
+        Bitmap bmp;
+        Thread thread;
         private void ImageDistortion_Load(object sender, EventArgs e)
         {
             LockTinhNang();
@@ -38,7 +36,9 @@ namespace ImageDistortion
             btnDelOutput.Enabled = true;
         }
 
+        #endregion
 
+        #region Open Image, Save Image, Delete Image, Exit
         private void openBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -96,37 +96,26 @@ namespace ImageDistortion
             {
                 MessageBox.Show("Chưa có ảnh!", "Image Null");
             }
-
         }
 
-
-
-        private void btn_Convert_Click(object sender, EventArgs e)
+        private void button1_Click_2(object sender, EventArgs e)
         {
-            thread = new Thread(() =>
-            {
-                try
-                {
-                    if (ChuyenAnhXam(bmp))
-                        pictureBoxOutput.Image = bmp;
-                }
-                finally
-                {
-                    this.Invoke(() =>
-                    {
-                        UnlockTinhNang();
-                        btnMucXam.Text = "ẢNH XÁM";
-                    });
-                }
-            });
-            btnMucXam.Text = "Loading...";
-            LockTinhNang();
-            thread.IsBackground = true;
-            thread.Start();
+            if (pictureBoxOutput.Image != null)
+                pictureBoxOutput.Image = null;
+            else
+                MessageBox.Show("Ảnh chưa thay đổi? Vui lòng chọn 1 tính năng", "Image not change");
         }
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            DialogResult rs = MessageBox.Show("Bạn có chắc chắn muốn thoát.", "Exit?", MessageBoxButtons.YesNo);
+            if (rs == DialogResult.Yes)
+                Application.Exit();
+            return;
+        }
+        #endregion
 
-
+        #region Chuyen anh xam
         // ChuyenAnhXam
         public static bool ChuyenAnhXam(Bitmap bmp)
         {
@@ -152,8 +141,32 @@ namespace ImageDistortion
             return true;
         }
 
+        private void btn_Convert_Click(object sender, EventArgs e)
+        {
+            thread = new Thread(() =>
+            {
+                try
+                {
+                    if (ChuyenAnhXam(bmp))
+                        pictureBoxOutput.Image = bmp;
+                }
+                finally
+                {
+                    this.Invoke(() =>
+                    {
+                        UnlockTinhNang();
+                        btnMucXam.Text = "ẢNH XÁM";
+                    });
+                }
+            });
+            btnMucXam.Text = "Processing...";
+            LockTinhNang();
+            thread.IsBackground = true;
+            thread.Start();
+        }
+        #endregion
 
-
+        #region Drag & Drop Image
         //Drag & Drop
         private void pictureBox2_DragEnter(object sender, DragEventArgs e)
         {
@@ -172,7 +185,9 @@ namespace ImageDistortion
                 }
             }
         }
+        #endregion
 
+        #region Loc trung vi & Khu nhieu
         private void button1_Click(object sender, EventArgs e)
         {
             thread = new Thread(() =>
@@ -191,7 +206,7 @@ namespace ImageDistortion
                     });
                 }
             });
-            btnKhuNhieu.Text = "Loading...";
+            btnKhuNhieu.Text = "Processing...";
             LockTinhNang();
             thread.IsBackground = true;
             thread.Start();
@@ -253,7 +268,9 @@ namespace ImageDistortion
             img.UnlockBits(imgdata);
             return true;
         }
+        #endregion
 
+        #region Chuyen anh nhi phan
         private void button1_Click_1(object sender, EventArgs e)
         {
             thread = new Thread(() =>
@@ -271,7 +288,7 @@ namespace ImageDistortion
                     });
                 }
             });
-            btnNhiPhan.Text = "Loading...";
+            btnNhiPhan.Text = "Processing...";
             LockTinhNang();
             thread.IsBackground = true;
             thread.Start();
@@ -279,7 +296,7 @@ namespace ImageDistortion
         unsafe
 
         //ChuyenAnhNhiPhan
-       private Bitmap ChuyenAnhNhiPhan(Bitmap bmp, byte nguong)
+        private Bitmap ChuyenAnhNhiPhan(Bitmap bmp, byte nguong)
         {
             Bitmap imgtmp = new Bitmap(bmp);
             imgtmp = bmp;
@@ -313,7 +330,9 @@ namespace ImageDistortion
             imgtmp.UnlockBits(imgdata);
             return imgtmp;
         }
+        #endregion
 
+        #region Chuyen anh am ban
         private void btnAmBan_Click(object sender, EventArgs e)
         {
             thread = new Thread(() =>
@@ -332,7 +351,7 @@ namespace ImageDistortion
                     });
                 }
             });
-            btnAmBan.Text = "Loading...";
+            btnAmBan.Text = "Processing...";
             LockTinhNang();
             thread.IsBackground = true;
             thread.Start();
@@ -365,10 +384,12 @@ namespace ImageDistortion
             imgtmp.UnlockBits(imgdata);
             return imgtmp;
         }
+        #endregion
 
+        #region Chinh do sang & do tuong phan
         private void btnBrightness_Click(object sender, EventArgs e)
         {
-            btnContrast.Text = "Loading...";
+            btnBrightness.Text = "Processing...";
             LockTinhNang();
 
             BrightnessForm bf = new BrightnessForm();
@@ -378,13 +399,13 @@ namespace ImageDistortion
             this.pictureBoxOutput.Image = bmp;
 
             UnlockTinhNang();
-            btnContrast.Text = "ĐỘ TƯƠNG PHẢN";
+            btnBrightness.Text = "ĐỘ SÁNG";
         }
 
         private void btnContrast_Click(object sender, EventArgs e)
         {
 
-            btnContrast.Text = "Loading...";
+            btnContrast.Text = "Processing...";
             LockTinhNang();
 
             ContrastForm cf = new ContrastForm();
@@ -396,7 +417,9 @@ namespace ImageDistortion
             UnlockTinhNang();
             btnContrast.Text = "ĐỘ TƯƠNG PHẢN";
         }
+        #endregion
 
+        #region handle Image: Nen anh & Giai nen
         public string ChuyenAnhThanhChuoi(Image image)
         {
 
@@ -531,7 +554,7 @@ namespace ImageDistortion
         }
         private void btnCompress_Click(object sender, EventArgs e)
         {
-            btnCompress.Text = "Loading...";
+            btnCompress.Text = "Processing...";
             LockTinhNang();
             string base64String = ChuyenAnhThanhChuoi(pictureBoxInput.Image);
             string ChuoiNhiPhan = ChuyenASCsangNhiPhan(base64String);
@@ -561,7 +584,7 @@ namespace ImageDistortion
 
         private void btnDecompress_Click(object sender, EventArgs e)
         {
-            btnDecompress.Text = "Loading...";
+            btnDecompress.Text = "Processing...";
             LockTinhNang();
             //tạo hộp thoại mở file
             OpenFileDialog ofd = new OpenFileDialog();
@@ -588,10 +611,10 @@ namespace ImageDistortion
                     string ChuoiAnh = ChuyenNhiPhanSangASC(ChuoiGiaiNen);
                     pictureBoxOutput.Image = ChuyenChuoiThanhAnh(ChuoiAnh);
                 }
-                catch(Exception ex) 
+                catch (Exception ex)
                 {
                     //MessageBox.Show(ex.ToString());
-                    MessageBox.Show("Ảnh không hợp lệ, ảnh không đúng định dạng file nén!","Format image");
+                    MessageBox.Show("Ảnh không hợp lệ, ảnh không đúng định dạng file nén!", "Format image");
                 }
 
             }
@@ -657,7 +680,9 @@ namespace ImageDistortion
 
             return Output.ToString();
         }
+        #endregion
 
+        #region lam net anh
         private void btnReduceImage_Click(object sender, EventArgs e)
         {
             thread = new Thread(() =>
@@ -675,7 +700,7 @@ namespace ImageDistortion
                     });
                 }
             });
-            btnSharpen.Text = "Loading...";
+            btnSharpen.Text = "Processing...";
             LockTinhNang();
             thread.IsBackground = true;
             thread.Start();
@@ -706,23 +731,13 @@ namespace ImageDistortion
                 for (int y = 0; y < h; ++y)
                 {
                     double red = 0.0, green = 0.0, blue = 0.0;
-
-                    ////=====[REMOVE LINES]========================================================
-                    //// Color must be read per filter entry, not per image pixel.
-                    //Color imageColor = image.GetPixel(x, y);
-                    ////===========================================================================
-
                     for (int filterX = 0; filterX < filterWidth; filterX++)
                     {
                         for (int filterY = 0; filterY < filterHeight; filterY++)
                         {
                             int imageX = (x - filterWidth / 2 + filterX + w) % w;
                             int imageY = (y - filterHeight / 2 + filterY + h) % h;
-
-                            //=====[INSERT LINES]========================================================
-                            // Get the color here - once per fiter entry and image pixel.
                             Color imageColor = image.GetPixel(imageX, imageY);
-                            //===========================================================================
 
                             red += imageColor.R * filter[filterX, filterY];
                             green += imageColor.G * filter[filterX, filterY];
@@ -745,27 +760,6 @@ namespace ImageDistortion
             }
             return sharpenImage;
         }
-
-
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-            if (pictureBoxOutput.Image != null)
-                pictureBoxOutput.Image = null;
-            else
-                MessageBox.Show("Ảnh chưa thay đổi? Vui lòng chọn 1 tính năng", "Image not change");
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            DialogResult rs = MessageBox.Show("Bạn có chắc chắn muốn thoát.", "Exit?", MessageBoxButtons.YesNo);
-            if (rs == DialogResult.Yes)
-                Application.Exit();
-            return;
-        }
-
-        private void pictureBoxOutput_EnabledChanged(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }

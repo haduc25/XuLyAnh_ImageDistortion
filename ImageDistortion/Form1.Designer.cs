@@ -48,7 +48,6 @@
             this.gbHandleFile = new System.Windows.Forms.GroupBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnDelOutput = new System.Windows.Forms.Button();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOutput)).BeginInit();
             this.gbOutput.SuspendLayout();
@@ -112,7 +111,6 @@
             this.pictureBoxOutput.Size = new System.Drawing.Size(486, 373);
             this.pictureBoxOutput.TabIndex = 3;
             this.pictureBoxOutput.TabStop = false;
-            this.pictureBoxOutput.EnabledChanged += new System.EventHandler(this.pictureBoxOutput_EnabledChanged);
             this.pictureBoxOutput.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox2_DragDrop);
             this.pictureBoxOutput.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBox2_DragEnter);
             // 
@@ -363,6 +361,5 @@
         private Button btnCompress;
         private Button btnDelOutput;
         private Button btnExit;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
