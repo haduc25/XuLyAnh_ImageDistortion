@@ -77,7 +77,10 @@
             // 
             // BrightnessForm
             // 
+<<<<<<< HEAD
             this.AcceptButton = this.btnOk;
+=======
+>>>>>>> 93e55aa0d374f6988b21e0debbc8f3bcadb10887
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(211, 97);
