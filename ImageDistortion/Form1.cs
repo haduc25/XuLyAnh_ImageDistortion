@@ -17,7 +17,7 @@ namespace ImageDistortion
 
         private void ImageDistortion_Load(object sender, EventArgs e)
         {
-            saveBtn.Enabled = false;
+            btnSave.Enabled = false;
             pictureBoxOutput.AllowDrop = true;
             pictureBoxOutput.SizeMode = PictureBoxSizeMode.Zoom;
         }
@@ -148,7 +148,7 @@ namespace ImageDistortion
 
         private void pictureBox2_SizeModeChanged(object sender, EventArgs e)
         {
-            saveBtn.Enabled = true;
+            btnSave.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -327,7 +327,22 @@ namespace ImageDistortion
 
         private void btnBrightness_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Tính năng này đang hoàn thiện! 😊");
+            if (pictureBoxInput.Image != null)
+            {
+                btnBrightness.Text = "Loading...";
+                btnBrightness.Enabled = false;
+                BrightnessForm bf = new BrightnessForm();
+                bf.ShowDialog();
+                bmp = new Bitmap(this.pictureBoxInput.Image);
+                IncreasePicture.increaseBrightness(bmp, bf.getBrightness());
+                this.pictureBoxOutput.Image = bmp;
+                btnBrightness.Enabled = true;
+                btnBrightness.Text = "ĐỘ SÁNG";
+            }
+            else
+            {
+                MessageBox.Show("Chưa có ảnh đầu vào!", "Image Null");
+            }
         }
 
         private void btnContrast_Click(object sender, EventArgs e)
@@ -350,6 +365,14 @@ namespace ImageDistortion
         private void btnReduceImage_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Tính năng này đang hoàn thiện! 😊");
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            if (pictureBoxOutput.Image != null)
+            {
+                pictureBoxOutput.Image = null;
+            }
         }
     }
 }
