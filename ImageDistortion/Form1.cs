@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Drawing.Imaging;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace ImageDistortion
@@ -100,10 +101,16 @@ namespace ImageDistortion
 
         private void button1_Click_2(object sender, EventArgs e)
         {
+            bmp = null;
+            bmp = (Bitmap)pictureBoxInput.Image; //reset filter
             if (pictureBoxOutput.Image != null)
+            {
                 pictureBoxOutput.Image = null;
+            }
             else
+            {
                 MessageBox.Show("Ảnh chưa thay đổi? Vui lòng chọn 1 tính năng", "Image not change");
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -760,6 +767,12 @@ namespace ImageDistortion
             }
             return sharpenImage;
         }
+        #endregion
+
+        #region
+        //Haduc25 @08/11/2022 15:05pm
+        //Github: https://github.com/haduc25/XuLyAnh_ImageDistortion
+
         #endregion
     }
 }

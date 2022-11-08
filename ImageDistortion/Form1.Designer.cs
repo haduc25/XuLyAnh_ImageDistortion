@@ -310,7 +310,7 @@
             this.btnDelOutput.Name = "btnDelOutput";
             this.btnDelOutput.Size = new System.Drawing.Size(177, 43);
             this.btnDelOutput.TabIndex = 3;
-            this.btnDelOutput.Text = "Delete Output";
+            this.btnDelOutput.Text = "Delete Output/Filter";
             this.btnDelOutput.UseVisualStyleBackColor = true;
             this.btnDelOutput.Click += new System.EventHandler(this.button1_Click_2);
             // 
