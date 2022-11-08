@@ -9,6 +9,7 @@ namespace ImageDistortion
     {
         Image image;
         Bitmap bmp;
+        Thread thread;
 
         public ImageDistortion()
         {
@@ -18,13 +19,23 @@ namespace ImageDistortion
 
         private void ImageDistortion_Load(object sender, EventArgs e)
         {
+            LockTinhNang();
+            pictureBoxOutput.AllowDrop = true;
+            pictureBoxOutput.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+
+        private void LockTinhNang()
+        {
             gbChucNang.Enabled = false;
             btnSave.Enabled = false;
             btnDelOutput.Enabled = false;
-            pictureBoxOutput.AllowDrop = true;
-            pictureBoxOutput.SizeMode = PictureBoxSizeMode.Zoom;
-
-
+        }
+        private void UnlockTinhNang()
+        {
+            gbChucNang.Enabled = true;
+            btnSave.Enabled = true;
+            btnDelOutput.Enabled = true;
         }
 
 
@@ -34,13 +45,14 @@ namespace ImageDistortion
             ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
             DialogResult dlg = ofd.ShowDialog();
 
-
             if (dlg == DialogResult.OK)
             {
                 image = Image.FromFile(ofd.FileName);
                 bmp = (Bitmap)image;
                 pictureBoxInput.SizeMode = PictureBoxSizeMode.Zoom;
                 pictureBoxInput.Image = bmp;
+
+                UnlockTinhNang();
             }
         }
 
@@ -68,6 +80,7 @@ namespace ImageDistortion
                     {
                         pictureBoxInput.Image.Dispose();
                         pictureBoxInput.Image = null;
+                        LockTinhNang();
                     }
 
                     if (pictureBoxOutput.Image != null)
@@ -158,17 +171,46 @@ namespace ImageDistortion
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (pictureBoxInput.Image != null)
+            Action onCompleted = () =>
             {
-                btnKhuNhieu.Text = "Loading...";
-                btnKhuNhieu.Enabled = false;
-                if (LocTrungVi(bmp))
-                {
-                    pictureBoxOutput.Image = bmp;
-                }
+                //On complete action
                 btnKhuNhieu.Enabled = true;
                 btnKhuNhieu.Text = "KHỬ NHIỄU";
+            };
 
+            if (pictureBoxInput.Image != null)
+            {
+                //btnKhuNhieu.Text = "Loading...";
+                //btnKhuNhieu.Enabled = false;
+                //LockTinhNang();
+                thread = new Thread(() =>
+                {
+                    try
+                    {
+                        if (LocTrungVi(bmp))
+                        {
+                            Thread.Sleep(2000);
+                            pictureBoxOutput.Image = bmp;
+                        }
+                    }
+                    finally
+                    {
+                        //onCompleted();
+                        this.Invoke(onCompleted);
+                    }
+
+
+
+                });
+                btnKhuNhieu.Text = "Loading...";
+                btnKhuNhieu.Enabled = false;
+                thread.IsBackground = true;
+                thread.Start();
+
+
+                //UnlockTinhNang();
+                //btnKhuNhieu.Enabled = true;
+                //btnKhuNhieu.Text = "KHỬ NHIỄU";
             }
             else
             {
