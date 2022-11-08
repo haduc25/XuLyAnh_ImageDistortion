@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Data;
 using System.Drawing.Imaging;
-
+using System.Text;
 
 namespace ImageDistortion
 {
@@ -366,16 +366,250 @@ namespace ImageDistortion
             }
         }
 
+        public string ChuyenAnhThanhChuoi(Image image)
+        {
+
+            MemoryStream ms = new MemoryStream();
+
+            image.Save(ms, ImageFormat.Jpeg);
+
+            byte[] imageBytes = ms.ToArray();
+
+            //BitArray o = ms.ToArray<BitArray>();
+
+            string base64String = Convert.ToBase64String(imageBytes);
+
+            return base64String;
+        }
+        string ChuyenASCsangNhiPhan(string BanRo)
+        {
+
+            FileStream file = new FileStream(Directory.GetCurrentDirectory() + @"\ASCtoNhiPhan.txt", FileMode.Open, FileAccess.Read, FileShare.None);
+
+            StreamReader doc = new StreamReader(file);
+
+            //đọc từng dòng một
+            string Temp = "", NhiPhan = "", ThapPhan = "", Hex = "", ASC = "";
+
+            string[] MangNhiPhan = new string[BanRo.Length];
+
+            Temp = doc.ReadLine();
+            int t = 0;
+
+            while (Temp != null)
+            {
+
+                NhiPhan = Temp.Substring(0, 8).ToString();
+                ThapPhan = Temp.Substring(9, 3).ToString().Trim();
+                Hex = Temp.Substring(13, 2).ToString();
+                ASC = Temp.Substring(16, 1);
+
+                for (int i = 0; i < BanRo.Length; i++)
+                {
+                    if (ASC == BanRo[i].ToString())
+                    {
+                        MangNhiPhan[i] = NhiPhan;
+                        t++;
+                    }
+                }
+
+                if (t == BanRo.Length) break;
+
+                Temp = doc.ReadLine();
+            }
+
+            StringBuilder ChuoiNhiPhan = new StringBuilder("");
+
+            for (int i = 0; i < BanRo.Length; i++)
+            {
+                ChuoiNhiPhan.Append(MangNhiPhan[i]);
+            }
+
+            doc.Close();
+            file.Close();
+
+            return ChuoiNhiPhan.ToString();
+        }
+
+        string NenChuoiNhiPhan(string str)
+        {
+            StringBuilder Out = new StringBuilder("");
+            int e;
+            string p, cr = "";
+
+            if (str[0].ToString() == "0")
+            {
+                Out.Append("0");
+            }
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (i == str.Length - 1) { Out.Append("1"); break; };
+
+                e = 1;
+                p = str[i].ToString();
+
+                while (true)
+                {
+                    if (i + e >= str.Length)
+                    {
+                        Out.Append(e);
+                        i = str.Length;
+                        break;
+                    }
+                    else cr = str[i + e].ToString();
+
+                    if (p == cr)
+                        e++;
+                    else
+                    {
+                        Out.Append(e);
+                        if (e > 1)
+                            i += e - 1;
+                        break;
+                    }
+                }
+            }
+
+            return Out.ToString();
+        }
+
+        string GiaiNenChuoiNhiPhan(string str)
+        {
+            StringBuilder Out = new StringBuilder("");
+
+            int e = 0;
+
+            if (string.Equals(str[0].ToString(), "0"))
+                e = 1;
+
+            string bit;
+
+            for (int i = e; i < str.Length; i++)
+            {
+                if (i % 2 == 0) bit = "1";
+                else bit = "0";
+
+                int length = Convert.ToInt16(str[i].ToString());
+
+                for (int j = 0; j < length; j++)
+                    Out.Append(bit);
+            }
+
+            return Out.ToString();
+        }
         private void btnCompress_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Tính năng này đang hoàn thiện! 😊");
+            string base64String = ChuyenAnhThanhChuoi(pictureBoxInput.Image);
+
+            string ChuoiNhiPhan = ChuyenASCsangNhiPhan(base64String);
+
+            string ChuoiNen = NenChuoiNhiPhan(ChuoiNhiPhan);
+
+            SaveFileDialog sfl = new SaveFileDialog();
+            sfl.Filter = "Nén (*.NEN)|*.nen";
+
+            if (sfl.ShowDialog() == DialogResult.OK)
+            {
+                if (pictureBoxInput.Image != null)
+                {
+                    FileStream file = new FileStream(sfl.FileName, FileMode.Append, FileAccess.Write, FileShare.None);
+                    StreamWriter ghi = new StreamWriter(file);
+                    ghi.Write(ChuoiNen);
+
+                    ghi.Dispose();
+                    ghi.Close();
+                    file.Dispose();
+                    file.Close();
+                }
+            }
 
         }
 
         private void btnDecompress_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Tính năng này đang hoàn thiện! 😊");
+            //tạo hộp thoại mở file
+            OpenFileDialog ofd = new OpenFileDialog();
 
+            //thiết lập chọn 1 hoặc nhiều file
+            ofd.Multiselect = false;
+
+            //cho hiện hộp thoại mở file và xét nếu ấn vào ok thì thực hiện lệnh
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                FileStream file = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read, FileShare.None);
+                StreamReader doc = new StreamReader(file);
+
+                string ChuoiGiaiNen = GiaiNenChuoiNhiPhan(doc.ReadToEnd());
+
+                doc.Dispose();
+                doc.Close();
+                file.Dispose();
+                file.Close();
+
+                string ChuoiAnh = ChuyenNhiPhanSangASC(ChuoiGiaiNen);
+                pictureBoxOutput.Image = ChuyenChuoiThanhAnh(ChuoiAnh);
+            }
+
+        }
+
+        public Image ChuyenChuoiThanhAnh(string base64String)
+        {
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+
+            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+
+            ms.Write(imageBytes, 0, imageBytes.Length);
+
+            Image image = Image.FromStream(ms, true);
+
+            return image;
+        }
+
+        string ChuyenNhiPhanSangASC(string Input)
+        {
+            FileStream file = new FileStream(Directory.GetCurrentDirectory() + @"\ASCtoNhiPhan.txt", FileMode.Open, FileAccess.Read, FileShare.None);
+
+            StreamReader doc = new StreamReader(file);
+
+            string Temp, NhiPhan, ThapPhan, Hex, ASC;
+
+            StringBuilder Output = new StringBuilder("");
+
+            string Chuoi;
+
+            for (int i = 0; i < Input.Length; i = i + 8)
+            {
+                Chuoi = Input.Substring(i, 8);
+
+                //đọc từng dòng một
+                Temp = doc.ReadLine();
+
+                while (Temp != null)
+                {
+
+                    NhiPhan = Temp.Substring(0, 8).ToString();
+                    ThapPhan = Temp.Substring(9, 3).ToString().Trim();
+                    Hex = Temp.Substring(13, 2).ToString();
+                    ASC = Temp.Substring(16, 1);
+
+                    if (NhiPhan == Chuoi)
+                    {
+                        Output.Append(ASC);
+                        file.Seek(0, SeekOrigin.Begin);
+                        break;
+                    }
+
+                    Temp = doc.ReadLine();
+                }
+            }
+
+            doc.Dispose();
+            doc.Close();
+            file.Dispose();
+            file.Close();
+
+            return Output.ToString();
         }
 
         private void btnReduceImage_Click(object sender, EventArgs e)
