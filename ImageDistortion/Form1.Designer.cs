@@ -40,7 +40,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnReduceImage = new System.Windows.Forms.Button();
+            this.btnSharpen = new System.Windows.Forms.Button();
             this.btnDecompress = new System.Windows.Forms.Button();
             this.btnCompress = new System.Windows.Forms.Button();
             this.btnBrightness = new System.Windows.Forms.Button();
@@ -193,7 +193,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.btnReduceImage);
+            this.groupBox3.Controls.Add(this.btnSharpen);
             this.groupBox3.Controls.Add(this.btnDecompress);
             this.groupBox3.Controls.Add(this.btnCompress);
             this.groupBox3.Controls.Add(this.btnBrightness);
@@ -209,19 +209,19 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Chức năng";
             // 
-            // btnReduceImage
+            // btnSharpen
             // 
-            this.btnReduceImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnReduceImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReduceImage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnReduceImage.ForeColor = System.Drawing.Color.White;
-            this.btnReduceImage.Location = new System.Drawing.Point(405, 141);
-            this.btnReduceImage.Name = "btnReduceImage";
-            this.btnReduceImage.Size = new System.Drawing.Size(177, 43);
-            this.btnReduceImage.TabIndex = 12;
-            this.btnReduceImage.Text = "GIẢM DUNG LƯỢNG";
-            this.btnReduceImage.UseVisualStyleBackColor = false;
-            this.btnReduceImage.Click += new System.EventHandler(this.btnReduceImage_Click);
+            this.btnSharpen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSharpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSharpen.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSharpen.ForeColor = System.Drawing.Color.White;
+            this.btnSharpen.Location = new System.Drawing.Point(405, 141);
+            this.btnSharpen.Name = "btnSharpen";
+            this.btnSharpen.Size = new System.Drawing.Size(177, 43);
+            this.btnSharpen.TabIndex = 12;
+            this.btnSharpen.Text = "LÀM NÉT ẢNH";
+            this.btnSharpen.UseVisualStyleBackColor = false;
+            this.btnSharpen.Click += new System.EventHandler(this.btnReduceImage_Click);
             // 
             // btnDecompress
             // 
@@ -344,7 +344,7 @@
         private GroupBox groupBox4;
         private Button btnBrightness;
         private Button btnContrast;
-        private Button btnReduceImage;
+        private Button btnSharpen;
         private Button btnDecompress;
         private Button btnCompress;
         private Button btnDelOutput;
