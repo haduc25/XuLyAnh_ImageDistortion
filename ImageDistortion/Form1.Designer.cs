@@ -37,8 +37,8 @@
             this.btnKhuNhieu = new System.Windows.Forms.Button();
             this.btnNhiPhan = new System.Windows.Forms.Button();
             this.btnAmBan = new System.Windows.Forms.Button();
-            this.gpOutput = new System.Windows.Forms.GroupBox();
-            this.gpInput = new System.Windows.Forms.GroupBox();
+            this.gbOutput = new System.Windows.Forms.GroupBox();
+            this.gbInput = new System.Windows.Forms.GroupBox();
             this.gbChucNang = new System.Windows.Forms.GroupBox();
             this.btnSharpen = new System.Windows.Forms.Button();
             this.btnDecompress = new System.Windows.Forms.Button();
@@ -48,10 +48,11 @@
             this.gbHandleFile = new System.Windows.Forms.GroupBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnDelOutput = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOutput)).BeginInit();
-            this.gpOutput.SuspendLayout();
-            this.gpInput.SuspendLayout();
+            this.gbOutput.SuspendLayout();
+            this.gbInput.SuspendLayout();
             this.gbChucNang.SuspendLayout();
             this.gbHandleFile.SuspendLayout();
             this.SuspendLayout();
@@ -111,7 +112,7 @@
             this.pictureBoxOutput.Size = new System.Drawing.Size(486, 373);
             this.pictureBoxOutput.TabIndex = 3;
             this.pictureBoxOutput.TabStop = false;
-            this.pictureBoxOutput.SizeModeChanged += new System.EventHandler(this.pictureBox2_SizeModeChanged);
+            this.pictureBoxOutput.EnabledChanged += new System.EventHandler(this.pictureBoxOutput_EnabledChanged);
             this.pictureBoxOutput.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox2_DragDrop);
             this.pictureBoxOutput.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBox2_DragEnter);
             // 
@@ -171,25 +172,25 @@
             this.btnAmBan.UseVisualStyleBackColor = false;
             this.btnAmBan.Click += new System.EventHandler(this.btnAmBan_Click);
             // 
-            // gpOutput
+            // gbOutput
             // 
-            this.gpOutput.Controls.Add(this.pictureBoxOutput);
-            this.gpOutput.Location = new System.Drawing.Point(542, 193);
-            this.gpOutput.Name = "gpOutput";
-            this.gpOutput.Size = new System.Drawing.Size(492, 402);
-            this.gpOutput.TabIndex = 8;
-            this.gpOutput.TabStop = false;
-            this.gpOutput.Text = "Output";
+            this.gbOutput.Controls.Add(this.pictureBoxOutput);
+            this.gbOutput.Location = new System.Drawing.Point(542, 193);
+            this.gbOutput.Name = "gbOutput";
+            this.gbOutput.Size = new System.Drawing.Size(492, 402);
+            this.gbOutput.TabIndex = 8;
+            this.gbOutput.TabStop = false;
+            this.gbOutput.Text = "Output";
             // 
-            // gpInput
+            // gbInput
             // 
-            this.gpInput.Controls.Add(this.pictureBoxInput);
-            this.gpInput.Location = new System.Drawing.Point(12, 193);
-            this.gpInput.Name = "gpInput";
-            this.gpInput.Size = new System.Drawing.Size(492, 402);
-            this.gpInput.TabIndex = 9;
-            this.gpInput.TabStop = false;
-            this.gpInput.Text = "Input";
+            this.gbInput.Controls.Add(this.pictureBoxInput);
+            this.gbInput.Location = new System.Drawing.Point(12, 193);
+            this.gbInput.Name = "gbInput";
+            this.gbInput.Size = new System.Drawing.Size(492, 402);
+            this.gbInput.TabIndex = 9;
+            this.gbInput.TabStop = false;
+            this.gbInput.Text = "Input";
             // 
             // gbChucNang
             // 
@@ -322,17 +323,18 @@
             this.ClientSize = new System.Drawing.Size(1033, 595);
             this.Controls.Add(this.gbHandleFile);
             this.Controls.Add(this.gbChucNang);
-            this.Controls.Add(this.gpInput);
-            this.Controls.Add(this.gpOutput);
+            this.Controls.Add(this.gbInput);
+            this.Controls.Add(this.gbOutput);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "ImageDistortion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ImageDistortion";
             this.Load += new System.EventHandler(this.ImageDistortion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOutput)).EndInit();
-            this.gpOutput.ResumeLayout(false);
-            this.gpInput.ResumeLayout(false);
+            this.gbOutput.ResumeLayout(false);
+            this.gbInput.ResumeLayout(false);
             this.gbChucNang.ResumeLayout(false);
             this.gbHandleFile.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -350,8 +352,8 @@
         private Button btnKhuNhieu;
         private Button btnNhiPhan;
         private Button btnAmBan;
-        private GroupBox gpOutput;
-        private GroupBox gpInput;
+        private GroupBox gbOutput;
+        private GroupBox gbInput;
         private GroupBox gbChucNang;
         private GroupBox gbHandleFile;
         private Button btnBrightness;
@@ -361,5 +363,6 @@
         private Button btnCompress;
         private Button btnDelOutput;
         private Button btnExit;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
